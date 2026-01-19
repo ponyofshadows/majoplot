@@ -38,7 +38,7 @@ class LabelValue(NamedTuple):
                 elif other.unit is None:
                     return False
                 else:
-                    return self.unit.name < other.unit.name
+                    return self.unit < other.unit
             else:
                 return True
         elif isinstance(other.value, Real):
@@ -216,7 +216,7 @@ class Data:
 
     @property
     def y_for_plot(self)->NDArray[np.floating]:
-        if self._ylim is None:
+        if self._y_for_plot is None:
             self._y_for_plot = self.points_for_plot[:,1]
         return self._y_for_plot
 
@@ -320,8 +320,8 @@ class AnnotationSpec(NamedTuple):
 class ArrowSpec(NamedTuple):
     point_x:float
     point_y:float
-    arrowstyle:str = "->",
-    color:str = "black",
+    arrowstyle:str = "->"
+    color:str = "black"
     linewidth:float = 1.0
 
 class IgnoreOutlierSpec(NamedTuple):
@@ -350,10 +350,10 @@ class MutiAxesSpec(Protocol):
         ...
 
 # ======== Proj & folder ========
-class folder(dict[str:Figure]):
+class folder(dict[str,Figure]):
     pass
 
-class Project(dict[str:folder]):
+class Project(dict[str,folder]):
     pass
 
 # ======== Scenario ========

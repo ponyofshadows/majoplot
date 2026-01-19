@@ -77,7 +77,6 @@ class InsertAxesSpec(NamedTuple):
                     else:
                         break
                 histograms[y, x] = h
-        import matplotlib.pyplot as plt
         @dataclass(slots=True)
         class Rectangle:
             x0:int|np.int_
