@@ -1,0 +1,60 @@
+[project]
+name = "majoplot"
+version = "0.1.3"
+description = "Automates scenario-specific data preprocessing and plotting workflows for condensed-matter physics labs (OriginLab COM backend + Matplotlib for preview)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+
+authors = [
+  { name = "ponyofshadows" }
+]
+
+keywords = [
+  "originlab",
+  "origin",
+  "com",
+  "plotting",
+  "vsm",
+  "ppms",
+  "xrd",
+  "condensed-matter",
+  "materials-science"
+]
+
+classifiers = [
+  "Intended Audience :: Science/Research",
+  "Topic :: Scientific/Engineering :: Physics",
+  "Topic :: Scientific/Engineering :: Visualization",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Operating System :: Microsoft :: Windows",
+  "Operating System :: OS Independent",
+]
+
+dependencies = [
+  # Matplotlib backend
+  "matplotlib>=3.8",
+  "numpy>=2.0",
+
+  # Origin COM backend (Windows only)
+  "pywin32>=311; platform_system=='Windows'",
+]
+
+[project.urls]
+Homepage = "https://github.com/ponyofshadows/majoplot"
+Source = "https://github.com/ponyofshadows/majoplot"
+Issues = "https://github.com/ponyofshadows/majoplot/issues"
+
+[project.scripts]
+majoplot = "majoplot.__main__:main"
+
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/majoplot"]

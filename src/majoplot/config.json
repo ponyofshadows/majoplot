@@ -1,0 +1,11 @@
+{
+    "scenario": {
+        "_items": [
+            "DIY",
+            "MT"
+        ],
+        "_selected": 0
+    },
+    "data path": ".",
+    "output path": "./outputs/"
+} 
