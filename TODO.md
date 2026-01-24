@@ -1,0 +1,1 @@
+- take in account the situation that no point in data
