@@ -1,6 +1,6 @@
 [project]
 name = "majoplot"
-version = "0.1.4"
+version = "0.1.5"
 description = "Automates scenario-specific data preprocessing and plotting workflows for condensed-matter physics labs (OriginLab COM backend + Matplotlib for preview)."
 readme = "README.md"
 requires-python = ">=3.11"
