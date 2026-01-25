@@ -21,6 +21,7 @@ R3, I3 = "Bridge 3 Resistivity (Ohm-m)", "Bridge 3 Excitation (uA)"
 
 class PPMS_Resistivity:
     instrument = "PPMS"
+    prefs_scenario = "RT"
     
     @classmethod
     def fetch_raw_data(cls, raw_data_file:TextIO, raw_data_name:str)->Data|FAIL:

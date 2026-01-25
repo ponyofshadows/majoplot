@@ -210,7 +210,10 @@ class MainWindow(ttk.Frame):
         snames = sorted(self.scenarios.keys())
         self.scenario_cb["values"] = snames
         if snames:
-            self.scenario_var.set(snames[0])
+            try:
+                self.scenario_var.set(self.importers[name].prefs_scenario)
+            except AttributeError:
+                self.scenario_var.set(snames[0])
 
     # ---------------- Import flow ----------------
     def _pick_raw_files(self) -> None:

@@ -359,6 +359,7 @@ class Project(dict[str,folder]):
 # ======== Scenario ========
 class Importer(Protocol):
     instrument: str
+    prefs_scenario: str
 
     @classmethod
     def fetch_raw_data(cls, raw_data_file:TextIO, raw_data_name:str)->Data|FAIL:

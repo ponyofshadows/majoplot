@@ -25,6 +25,7 @@ headers = (T, H, M, Mfix, Mfit, SD, CP, DCC)
 
 class VSM:
     instrument = "VSM"
+    prefs_scenario = "MT"
     
     @classmethod
     def fetch_raw_data(cls, raw_data_file:TextIO, raw_data_name:str)->Data|FAIL:

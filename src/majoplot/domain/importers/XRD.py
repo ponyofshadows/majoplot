@@ -5,6 +5,7 @@ from ..base import *
 
 class XRD:
     instrument = "XRD"
+    prefs_scenario = "Compare"
     
     @classmethod
     def fetch_raw_data(cls, raw_data_file:TextIO, raw_data_name:str)->Data|FAIL:
