@@ -8,7 +8,7 @@ def group_into_axes(all_datas:Iterable[Data], scenario:Scenario)->list[Axes]:
     make_axes_spec = scenario.make_axes_spec
 
     axes_labels_and_data_pools, _ = LabelDict.group(
-        ((data.labels, data) for data in all_datas if not data.unused),
+        ((data.labels, data) for data in all_datas if ( (not data.unused) and (data.points.size > 0) )),
         group_label_names=axes_label_names,
     )
     axes_pool = []
