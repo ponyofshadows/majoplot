@@ -12,7 +12,7 @@ H = "Magnetic Field (Oe)"
 
 
 class MT:
-    data_summary_label_names = ["H","cooling_type"]
+    data_summary_label_names = ["mass","H","cooling_type"]
     axes_label_names = ("material","date","raw_data", "H")
     figure_label_names = ("material","date", "raw_data","H")
     figure_summary_label_names = ("raw_data","date")
