@@ -590,13 +590,13 @@ def _legend_anchor_xy(leg: LegendSpec) -> tuple[float, float]:
 
     loc = (leg.loc or "upper right").lower().replace("_", " ")
     table = {
-        "upper right": (85.0, 90.0),
+        "upper right": (70.0, 90.0),
         "upper left": (10.0, 90.0),
         "lower left": (10.0, 10.0),
-        "lower right": (85.0, 10.0),
+        "lower right": (70.0, 10.0),
         "center": (50.0, 50.0),
     }
-    return table.get(loc, (85.0, 90.0))
+    return table.get(loc, (70.0, 90.0))
 
 
 def _apply_legend_text(og: Any, layer_idx: int, legend_spec: LegendSpec, legend_text: str, scale: float) -> None:
