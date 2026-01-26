@@ -418,8 +418,8 @@ class MainWindow(ttk.Frame):
             return
         proj = self.edit_proj_name_var.get().strip()
         folder = self.edit_folder_path_var.get().strip()
-        if not proj or not folder:
-            messagebox.showwarning("Invalid", "proj_name and folder_path are required.")
+        if not proj:
+            messagebox.showwarning("Invalid", "proj_name is required.")
             return
         fig = self.figures[idx]
         if overwrite:
@@ -431,8 +431,8 @@ class MainWindow(ttk.Frame):
     def _apply_archive_to_all(self, overwrite: bool) -> None:
         proj = self.global_proj_name_var.get().strip()
         folder = self.global_folder_path_var.get().strip()
-        if not proj or not folder:
-            messagebox.showwarning("Invalid", "proj_name and folder_path are required.")
+        if not proj:
+            messagebox.showwarning("Invalid", "proj_name is required.")
             return
         for fig in self.figures:
             if overwrite:
