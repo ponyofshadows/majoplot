@@ -380,7 +380,7 @@ class Scenario(Protocol):
         ...
     
     @classmethod
-    def make_axes_spec(cls, axes_labels:LabelDict)->AxesSpec:
+    def make_axes_spec(cls, axes_labels:LabelDict, data_pool:Iterable[Data])->AxesSpec:
         ...
 
     @classmethod

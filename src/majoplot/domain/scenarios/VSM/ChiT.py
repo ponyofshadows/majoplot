@@ -9,7 +9,7 @@ FIGSIZE = (8, 6)
 T = "Temperature (K)"
 M = "DC Moment Free Ctr (emu)"
 H = "Magnetic Field (Oe)"
-chi = "χ ( m^3 / kg )"
+chi = "χ ( m³ / kg )"
 
 
 class ChiT:
@@ -107,10 +107,53 @@ class ChiT:
 
 
     @classmethod
-    def make_axes_spec(cls,axes_labels)->AxesSpec:
+    def make_axes_spec(cls,axes_labels,data_pool:Iterable[Data])->AxesSpec:
+        if data_pool:
+            x_min, x_max = data_pool[0].xlim
+            for data in data_pool[1:]:
+                data_x_min, data_x_max = data.xlim
+                if data_x_min > x_min:
+                    x_min = data_x_min
+                if data_x_max < x_max:
+                    x_max = data_x_max
+            
+            y_min, y_max = None, None
+            for data in data_pool:
+                mask = (data.points_for_plot[:, 0] >= x_min) & (data.points_for_plot[:, 0] <= x_max)
+                y = data.points_for_plot[mask, 1]
+                data_y_min = y.min()
+                data_y_max = y.max()
+                if y_min:
+                    if data_y_min < y_min:
+                        y_min = data_y_min
+                else:
+                    y_min = data_y_min
+
+                if y_max:
+                    if data_y_max > y_max:
+                        y_max = data_y_max
+                else:
+                    y_max = data_y_max
+            
+            x_magin = (x_max - x_min) * 0.05
+            y_magin = (y_max - y_min) * 0.05
+            
+            x_min, x_max = x_min - x_magin, x_max + x_magin
+            y_min, y_max = y_min - y_magin, y_max + y_magin
+
+
+        else:
+            x_min, x_max = None, None
+            y_min, y_max = None, None
+
+
         return AxesSpec(
             x_axis_title=T,
-            y_axis_title=M,
+            y_axis_title=chi,
+            x_left_lim=x_min,
+            x_right_lim=x_max,
+            y_left_lim=y_min,
+            y_right_lim=y_max,
             major_grid=None,
             major_tick=TickSpec(),
             legend=LegendSpec(),
@@ -126,7 +169,16 @@ class ChiT:
             title=None,
             figsize=FIGSIZE,
             linestyle_cycle= ("-", "--"),
-            linecolor_cycle = ("black", "red"),
+            linecolor_cycle = (
+                "#1f77b4", "#1f77b4",  # blue (best first color)
+                "#ff7f0e", "#ff7f0e",  # orange
+                "#2ca02c", "#2ca02c",  # green
+                "#d62728", "#d62728",  # red
+                "#9467bd", "#9467bd",  # purple
+                "#8c564b", "#8c564b",  # brown
+                "#17becf", "#17becf",  # cyan
+                "#e377c2", "#e377c2",  # pink
+            ),
             linemarker_cycle = ("o","o","s","s","^","^","v","v","d","d","*","*","x","x","+","+"),
             alpa_cycle = (1.0,),
         )

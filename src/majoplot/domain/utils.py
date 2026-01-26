@@ -13,7 +13,7 @@ def group_into_axes(all_datas:Iterable[Data], scenario:Scenario)->list[Axes]:
     )
     axes_pool = []
     for axes_labels, data_pool in axes_labels_and_data_pools:  
-        spec = make_axes_spec(axes_labels)
+        spec = make_axes_spec(axes_labels, data_pool)
         axes_pool.append(Axes(spec, axes_labels, data_pool))
     return axes_pool
 

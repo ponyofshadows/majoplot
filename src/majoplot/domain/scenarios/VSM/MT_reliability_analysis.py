@@ -107,7 +107,7 @@ class MT_reliability_analysis:
 
 
     @classmethod
-    def make_axes_spec(cls,axes_labels:LabelDict)->AxesSpec:
+    def make_axes_spec(cls,axes_labels:LabelDict, data_pool)->AxesSpec:
         return AxesSpec(
             x_axis_title=T,
             y_axis_title=axes_labels["Y_axis"],

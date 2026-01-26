@@ -99,7 +99,7 @@ class MT_insert:
 
 
     @classmethod
-    def make_axes_spec(cls, axes_labels)->AxesSpec:
+    def make_axes_spec(cls, axes_labels, data_pool)->AxesSpec:
         return AxesSpec(
             x_axis_title=T,
             y_axis_title=M,

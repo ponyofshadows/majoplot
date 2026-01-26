@@ -72,7 +72,7 @@ class Compare:
         return datas
 
     @classmethod
-    def make_axes_spec(cls, axes_labels)->AxesSpec:
+    def make_axes_spec(cls, axes_labels, data_pool)->AxesSpec:
         return AxesSpec(
             x_axis_title="2θ",
             y_axis_title="I",
