@@ -9,7 +9,7 @@ FIGSIZE = (8, 6)
 T = "Temperature (K)"
 M = "DC Moment Free Ctr (emu)"
 H = "Magnetic Field (Oe)"
-chi = "χ ( m³ / kg )"
+chi = "χ ( cm³ / g )"
 
 
 class ChiT:
@@ -69,7 +69,7 @@ class ChiT:
                 if mass == 0:
                     mass = np.nan
                 safe_H_stage = np.nan if H_stage == 0 else H_stage
-                chi_points = np.column_stack([a_points[:,0], a_points[:,1] / safe_H_stage * 1e6 / mass])
+                chi_points = np.column_stack([a_points[:,0], a_points[:,1] / safe_H_stage * 1e3 / mass])
                 datas.append(
                     Data(
                         labels=labels,

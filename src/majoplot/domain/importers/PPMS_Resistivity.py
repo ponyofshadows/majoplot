@@ -15,9 +15,9 @@ ROW_HEADERS       = 32
 
 T = "Temperature (K)"
 H = "Magnetic Field (Oe)"
-R1, I1 = "Bridge 1 Resistivity (Ohm-m)", "Bridge 1 Excitation (uA)"
-R2, I2 = "Bridge 2 Resistivity (Ohm-m)", "Bridge 2 Excitation (uA)"
-R3, I3 = "Bridge 3 Resistivity (Ohm-m)", "Bridge 3 Excitation (uA)"
+R1, I1 = "Bridge 1 Resistance (Ohms)", "Bridge 1 Excitation (uA)"
+R2, I2 = "Bridge 2 Resistance (Ohms)", "Bridge 2 Excitation (uA)"
+R3, I3 = "Bridge 3 Resistance (Ohms)", "Bridge 3 Excitation (uA)"
 
 class PPMS_Resistivity:
     instrument = "PPMS"

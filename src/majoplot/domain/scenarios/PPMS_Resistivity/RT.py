@@ -7,11 +7,11 @@ FIGSIZE = (8, 6)
 
 T = "Temperature (K)"
 H = "Magnetic Field (Oe)"
-R = "Resistivity (Ohm-m)"
+R = "Resistance (Ohms)"
 RI ={
-    1: {"R":"Bridge 1 Resistivity (Ohm-m)", "I":"Bridge 1 Excitation (uA)"},
-    2: {"R":"Bridge 2 Resistivity (Ohm-m)", "I":"Bridge 2 Excitation (uA)"},
-    3: {"R":"Bridge 3 Resistivity (Ohm-m)", "I":"Bridge 3 Excitation (uA)"},
+    1: {"R":"Bridge 1 Resistance (Ohms)", "I":"Bridge 1 Excitation (uA)"},
+    2: {"R":"Bridge 2 Resistance (Ohms)", "I":"Bridge 2 Excitation (uA)"},
+    3: {"R":"Bridge 3 Resistance (Ohms)", "I":"Bridge 3 Excitation (uA)"},
 }
 
 class RT:
@@ -77,7 +77,7 @@ class RT:
                         labels=labels,
                         _headers=_headers,
                         points=s_points[:,0:2],
-                        ignore_outliers=IgnoreOutlierSpec(min_gap_base=1e-6,min_gap_multiple=10),
+                        ignore_outliers=IgnoreOutlierSpec(min_gap_base=1e-4,min_gap_multiple=10),
                     ))
             
         return datas
