@@ -7,15 +7,14 @@ FIGSIZE = (8, 6)
 
 T = "Temperature (K)"
 H = "Magnetic Field (Oe)"
-R = "Resistivity (Ω·m)"
-_headers = (T,R)
+R = "Resistance (Ohms)"
 RI ={
     1: {"R":"Bridge 1 Resistance (Ohms)", "I":"Bridge 1 Excitation (uA)"},
     2: {"R":"Bridge 2 Resistance (Ohms)", "I":"Bridge 2 Excitation (uA)"},
     3: {"R":"Bridge 3 Resistance (Ohms)", "I":"Bridge 3 Excitation (uA)"},
 }
 
-class RT:
+class RT_Resistance:
     data_summary_label_names = ["H"]
     axes_label_names = ("date", "raw_data", "bridge", "sample_name")
     figure_label_names = ("date", "raw_data", "bridge", "sample_name")
@@ -53,17 +52,10 @@ class RT:
             for H_stage, points in split_datas:
                 for i in range(1,4):
                     _headerTRI = (T,RI[i]["R"],RI[i]["I"])
+                    _headers = (T,RI[i]["R"])
                     s_points = [ [point[headers[x]] for x in _headerTRI] for point in points]
-                    # clear null Resistance points
+                    # clear null R points
                     s_points = np.array([point for point in s_points if point[1]])
-                    # calculate resistivity
-                    cross_section = raw_labels[f"sample{i}_cross_section"].value * 1e-6
-                    if cross_section <= 0:
-                        cross_section = np.nan
-                    length = raw_labels[f"sample{i}_length"].value * 1e-3
-                    if length <= 0:
-                        length = np.nan
-                    r_points = np.column_stack([s_points[:,0], s_points[:,1] * cross_section / length])
                     # record
                     Imin = np.min(s_points[:,2])
                     Imax = np.max(s_points[:,2])
@@ -84,8 +76,8 @@ class RT:
                     datas.append(Data(
                         labels=labels,
                         _headers=_headers,
-                        points=r_points,
-                        ignore_outliers=IgnoreOutlierSpec(min_gap_base=1e-8,min_gap_multiple=10),
+                        points=s_points[:,0:2],
+                        ignore_outliers=IgnoreOutlierSpec(min_gap_base=1e-4,min_gap_multiple=10),
                     ))
             
         return datas

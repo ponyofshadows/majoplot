@@ -11,7 +11,7 @@ M = "DC Moment Free Ctr (emu)"
 H = "Magnetic Field (Oe)"
 
 
-class MT_origin:
+class MT_original:
     data_summary_label_names = ["mass","H","cooling_type"]
     axes_label_names = ("material","date","raw_data", "H")
     figure_label_names = ("material","date", "raw_data","H")

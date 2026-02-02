@@ -6,10 +6,16 @@ from ..utils import skip_lines_then_readline
 
 ROW_FILEOPENTIME  = 3
 ROW_SAMPLE1_NAME  = 6
+ROW_SAMPLE1_CROSS_SECTION = 7
+ROW_SAMPLE1_LENGTH = 8
 ROW_SAMPLE1_UNITS = 9
 ROW_SAMPLE2_NAME  = 10
+ROW_SAMPLE2_CROSS_SECTION = 11
+ROW_SAMPLE2_LENGTH = 12
 ROW_SAMPLE2_UNITS = 13
 ROW_SAMPLE3_NAME  = 14
+ROW_SAMPLE3_CROSS_SECTION = 15
+ROW_SAMPLE3_LENGTH = 16
 ROW_SAMPLE3_UNITS = 17
 ROW_HEADERS       = 32
 
@@ -52,8 +58,36 @@ class PPMS_Resistivity:
             return fail_signal
         labels["sample1_name"] = LabelValue(s1_name)
 
+        # S1 Cross Section
+        line = skip_lines_then_readline(raw_data_file, ROW_SAMPLE1_CROSS_SECTION - ROW_SAMPLE1_NAME -1)
+        info = line.split(",")
+        try:
+            if info[-1].strip() != "Sample1 Cross Section":
+                return fail_signal
+            s1_cross_section = info[1]
+        except IndexError:
+            return fail_signal
+        try:
+            labels["sample1_cross_section"] = LabelValue(float(s1_cross_section),unit="mm²")
+        except ValueError:
+            return fail_signal
+
+        # S1 Length
+        line = skip_lines_then_readline(raw_data_file, ROW_SAMPLE1_LENGTH - ROW_SAMPLE1_CROSS_SECTION -1)
+        info = line.split(",")
+        try:
+            if info[-1].strip() != "Sample1 Length":
+                return fail_signal
+            s1_length = info[1]
+        except IndexError:
+            return fail_signal
+        try:
+            labels["sample1_length"] = LabelValue(float(s1_length),unit="mm")
+        except ValueError:
+            return fail_signal
+
         # S1 Units
-        line = skip_lines_then_readline(raw_data_file, ROW_SAMPLE1_UNITS - ROW_SAMPLE1_NAME -1)
+        line = skip_lines_then_readline(raw_data_file, ROW_SAMPLE1_UNITS - ROW_SAMPLE1_LENGTH -1)
         info = line.split(",")
         try:
             if info[-1].strip() != "Sample1 Units":
@@ -74,8 +108,37 @@ class PPMS_Resistivity:
             return fail_signal
         labels["sample2_name"] = LabelValue(s2_name)
 
+        # S2 Cross Section
+        line = skip_lines_then_readline(raw_data_file, ROW_SAMPLE2_CROSS_SECTION - ROW_SAMPLE2_NAME -1)
+        info = line.split(",")
+        try:
+            if info[-1].strip() != "Sample2 Cross Section":
+                return fail_signal
+            s2_cross_section = info[1]
+        except IndexError:
+            return fail_signal
+        try:
+            labels["sample2_cross_section"] = LabelValue(float(s2_cross_section),unit="mm²")
+        except ValueError:
+            return fail_signal
+
+        # S1 Length
+        line = skip_lines_then_readline(raw_data_file, ROW_SAMPLE2_LENGTH - ROW_SAMPLE2_CROSS_SECTION -1)
+        info = line.split(",")
+        try:
+            if info[-1].strip() != "Sample2 Length":
+                return fail_signal
+            s2_length = info[1]
+        except IndexError:
+            return fail_signal
+        try:
+            labels["sample2_length"] = LabelValue(float(s2_length),unit="mm")
+        except ValueError:
+            return fail_signal
+
+
         # S2 Units
-        line = skip_lines_then_readline(raw_data_file, ROW_SAMPLE2_UNITS - ROW_SAMPLE2_NAME -1)
+        line = skip_lines_then_readline(raw_data_file, ROW_SAMPLE2_UNITS - ROW_SAMPLE2_LENGTH -1)
         info = line.split(",")
         try:
             if info[-1].strip() != "Sample2 Units":
@@ -96,8 +159,36 @@ class PPMS_Resistivity:
             return fail_signal
         labels["sample3_name"] = LabelValue(s3_name)
 
+        # S3 Cross Section
+        line = skip_lines_then_readline(raw_data_file, ROW_SAMPLE3_CROSS_SECTION - ROW_SAMPLE3_NAME -1)
+        info = line.split(",")
+        try:
+            if info[-1].strip() != "Sample3 Cross Section":
+                return fail_signal
+            s3_cross_section = info[1]
+        except IndexError:
+            return fail_signal
+        try:
+            labels["sample3_cross_section"] = LabelValue(float(s3_cross_section),unit="mm²")
+        except ValueError:
+            return fail_signal
+
+        # S1 Length
+        line = skip_lines_then_readline(raw_data_file, ROW_SAMPLE3_LENGTH - ROW_SAMPLE3_CROSS_SECTION -1)
+        info = line.split(",")
+        try:
+            if info[-1].strip() != "Sample3 Length":
+                return fail_signal
+            s3_length = info[1]
+        except IndexError:
+            return fail_signal
+        try:
+            labels["sample3_length"] = LabelValue(float(s3_length),unit="mm")
+        except ValueError:
+            return fail_signal
+
         # S3 Units
-        line = skip_lines_then_readline(raw_data_file, ROW_SAMPLE3_UNITS - ROW_SAMPLE3_NAME -1)
+        line = skip_lines_then_readline(raw_data_file, ROW_SAMPLE3_UNITS - ROW_SAMPLE3_LENGTH -1)
         info = line.split(",")
         try:
             if info[-1].strip() != "Sample3 Units":
