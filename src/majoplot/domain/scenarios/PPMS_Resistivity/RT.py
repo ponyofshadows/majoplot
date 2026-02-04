@@ -7,8 +7,7 @@ FIGSIZE = (8, 6)
 
 T = "Temperature (K)"
 H = "Magnetic Field (Oe)"
-R = "Resistivity (Ω·m)"
-_headers = (T,R)
+R = "Resistance (Ohms)"
 RI ={
     1: {"R":"Bridge 1 Resistance (Ohms)", "I":"Bridge 1 Excitation (uA)"},
     2: {"R":"Bridge 2 Resistance (Ohms)", "I":"Bridge 2 Excitation (uA)"},
@@ -53,17 +52,10 @@ class RT:
             for H_stage, points in split_datas:
                 for i in range(1,4):
                     _headerTRI = (T,RI[i]["R"],RI[i]["I"])
+                    _headers = (T,RI[i]["R"])
                     s_points = [ [point[headers[x]] for x in _headerTRI] for point in points]
-                    # clear null Resistance points
+                    # clear null R points
                     s_points = np.array([point for point in s_points if point[1]])
-                    # calculate resistivity
-                    cross_section = raw_labels[f"sample{i}_cross_section"].value * 1e-6
-                    if cross_section <= 0:
-                        cross_section = np.nan
-                    length = raw_labels[f"sample{i}_length"].value * 1e-3
-                    if length <= 0:
-                        length = np.nan
-                    r_points = np.column_stack([s_points[:,0], s_points[:,1] * cross_section / length])
                     # record
                     Imin = np.min(s_points[:,2])
                     Imax = np.max(s_points[:,2])
@@ -84,8 +76,8 @@ class RT:
                     datas.append(Data(
                         labels=labels,
                         _headers=_headers,
-                        points=r_points,
-                        ignore_outliers=IgnoreOutlierSpec(min_gap_base=1e-8,min_gap_multiple=10),
+                        points=s_points[:,0:2],
+                        ignore_outliers=IgnoreOutlierSpec(min_gap_base=1e-4,min_gap_multiple=10),
                     ))
             
         return datas
@@ -100,6 +92,8 @@ class RT:
             major_grid=None,
             major_tick=TickSpec(),
             legend=LegendSpec(fontsize=5),
+            linewidth=1,
+            marker_size=2,
         )
             
 
@@ -112,13 +106,15 @@ class RT:
             title=None,
             figsize=FIGSIZE,
             linestyle_cycle= ("-",),
+
             linecolor_cycle = (
-                "#2d0b59", "#3b0f6f", "#4a136e", "#5a176e", "#6a1c6e",
-                "#7a216f", "#8b2770", "#9b2d71", "#ac3372", "#bd3973",
-                "#ce4074", "#df4775", "#f04f76", "#f86a5a", "#fb8c3c",
-                "#fdbb2d", "#fcfdbf",
+                "#515151", "#F14040", "#1A6FDF", "#37AD6B", "#B177DE",
+                "#CC9900", "#00CBCC", "#7D4E4E", "#8E8E00", "#FB6501",
+                "#6699CC", "#6FB802", "#f04f76", "#f86a5a", "#fb8c3c",
+                "#fdbb2d", "#fcfdbf","#2B2E83", "#E6007A", "#005F5F", 
+                "#1F3D2B",  "#E8C6E8","#FAB3d1",
                 ),
-            linemarker_cycle = ("o","s","^","v","d","*","x","+"),
+            linemarker_cycle = ("o",),
             alpa_cycle = (1.0,),
         )
     
