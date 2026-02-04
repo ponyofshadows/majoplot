@@ -106,15 +106,14 @@ class RT:
             title=None,
             figsize=FIGSIZE,
             linestyle_cycle= ("-",),
-
+            linemarker_cycle = ("o",),
             linecolor_cycle = (
                 "#515151", "#F14040", "#1A6FDF", "#37AD6B", "#B177DE",
                 "#CC9900", "#00CBCC", "#7D4E4E", "#8E8E00", "#FB6501",
-                "#6699CC", "#6FB802", "#f04f76", "#f86a5a", "#fb8c3c",
-                "#fdbb2d", "#fcfdbf","#2B2E83", "#E6007A", "#005F5F", 
-                "#1F3D2B",  "#E8C6E8","#FAB3d1",
+                "#6699CC", "#6FB802", "#FD0000FF", "#15ff00", "#FF9447",
+                "#fdbb2d", "#fcfdbf","#2B2E83", "#E6007A", "#00FFFF", 
+                "#6DFFA7",  "#FDBAFD","#FAB3d1",
                 ),
-            linemarker_cycle = ("o",),
             alpa_cycle = (1.0,),
         )
     

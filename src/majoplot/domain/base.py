@@ -205,7 +205,10 @@ class Data:
     @property
     def x_for_plot(self)->NDArray[np.floating]:
         if self._x_for_plot is None:
-            self._x_for_plot = self.points_for_plot[:,0]
+            try:
+                self._x_for_plot = self.points_for_plot[:,0]
+            except IndexError:
+                return np.asarray(np.nan)
         return self._x_for_plot
 
     @property
@@ -217,13 +220,16 @@ class Data:
     @property
     def y_for_plot(self)->NDArray[np.floating]:
         if self._y_for_plot is None:
-            self._y_for_plot = self.points_for_plot[:,1]
+            try:
+                self._y_for_plot = self.points_for_plot[:,1]
+            except IndexError:
+                return np.asarray(np.nan)
         return self._y_for_plot
 
     @property
     def ylim(self)->tuple[np.float64,np.float64]:
         if self._ylim is None:
-            self._ylim = (min(self.y_for_plot), max(self.y_for_plot))
+            self._ylim = (np.min(self.y_for_plot), np.max(self.y_for_plot))
         return self._ylim
     
     @property
