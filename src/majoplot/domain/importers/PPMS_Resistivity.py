@@ -211,7 +211,14 @@ class PPMS_Resistivity:
         points = []
         for line in raw_data_file:
             cells = line.split(",")
-            points.append([np.float64(cells[i]) if cells[i] else np.nan for i in indexs])
+            try:
+                points.append([np.float64(cells[i]) if cells[i] else np.nan for i in indexs])
+            except IndexError as e:
+                print(line)
+                if cells[0] == "Measurement was Aborted":
+                    continue
+                else:
+                    raise e
 
         return Data(
             labels=labels,
