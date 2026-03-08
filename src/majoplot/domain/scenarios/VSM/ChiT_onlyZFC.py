@@ -9,7 +9,7 @@ FIGSIZE = (8, 6)
 T = "Temperature (K)"
 M = "DC Moment Free Ctr (emu)"
 H = "Magnetic Field (Oe)"
-chi = "χ ( cm³ / g )"
+chi = "χ ( emu /(Oe⋅g) )"
 
 
 class ChiT_onlyZFC:
