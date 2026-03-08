@@ -214,7 +214,6 @@ class PPMS_Resistivity:
             try:
                 points.append([np.float64(cells[i]) if cells[i] else np.nan for i in indexs])
             except IndexError as e:
-                print(line)
                 if cells[0] == "Measurement was Aborted":
                     continue
                 else:
