@@ -165,6 +165,9 @@ class Data:
 
     def __post_init__(self):
         self.headers = dict((header, index) for (index, header) in enumerate(self._headers))
+    
+    def __len__(self):
+        return self.points.shape[0]
 
     def __repr__(self):
         return f"\nData({self.labels}\tShape: {self.points.shape})\n"

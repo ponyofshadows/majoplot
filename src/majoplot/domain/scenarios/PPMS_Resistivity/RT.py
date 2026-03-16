@@ -4,6 +4,7 @@ from ...base import *
 
 
 FIGSIZE = (8, 6)
+MIN_POINTS = 5
 
 T = "Temperature (K)"
 H = "Magnetic Field (Oe)"
@@ -73,11 +74,18 @@ class RT:
                     labels["H"] = LabelValue(H_stage, unit="Oe")
                     labels["I_range"] = LabelValue(Irange,unit="μA")
                     labels.summary_names = cls.data_summary_label_names
+
+                    if s_points.shape[0] < MIN_POINTS:
+                        unused = True
+                    else:
+                        unused = False
+
                     datas.append(Data(
                         labels=labels,
                         _headers=_headers,
                         points=s_points[:,0:2],
                         ignore_outliers=IgnoreOutlierSpec(min_gap_base=1e-4,min_gap_multiple=10),
+                        unused=unused,
                     ))
             
         return datas

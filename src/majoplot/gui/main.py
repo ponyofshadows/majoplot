@@ -5,6 +5,7 @@ from tkinter import ttk, filedialog, messagebox
 from pathlib import Path
 from collections import OrderedDict
 from typing import Any
+from importlib.metadata import version
 
 from ..app.cli import load_named_objects  # reuse discovery helper
 from ..domain.base import fail_signal, Figure
@@ -83,7 +84,7 @@ class MainWindow(ttk.Frame):
 
     # ---------------- UI construction ----------------
     def _build_ui(self) -> None:
-        self.master.title("Majoplot")
+        self.master.title(f"Majoplot {version("majoplot")}")
         self.master.geometry("1400x720")
 
         top = ttk.Frame(self)

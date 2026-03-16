@@ -4,6 +4,7 @@ from ...base import *
 
 
 FIGSIZE = (8, 6)
+MIN_POINTS = 5
 
 T = "Temperature (K)"
 H = "Magnetic Field (Oe)"
@@ -104,6 +105,8 @@ class RT_normalized:
             mask = (points[:,0] > comm_left_margin) & (points[:, 0] < comm_right_margin)
             points = points[mask,:]
             data.points = points
+            if points.shape[0] < MIN_POINTS:
+                data.unused = True
             data._ignore_outliers_spec_cache = None
             data._points_for_plot = None
             data._x_for_plot = None
