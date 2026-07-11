@@ -136,15 +136,14 @@ class MainWindow(ttk.Frame):
 
         row2 = ttk.Frame(action)
         row2.pack(fill=tk.X, padx=6, pady=(4, 2))
-        ttk.Label(row2, text="proj_name").pack(side=tk.LEFT)
+        ttk.Label(row2, text="OPJU file name").pack(side=tk.LEFT)
         ttk.Entry(row2, textvariable=self.edit_proj_name_var, width=10).pack(side=tk.LEFT, padx=(6, 12))
-        ttk.Label(row2, text="folder_path").pack(side=tk.LEFT)
+        ttk.Label(row2, text="Path in OPJU").pack(side=tk.LEFT)
         ttk.Entry(row2, textvariable=self.edit_folder_path_var, width=16).pack(side=tk.LEFT, padx=(6, 0))
 
         row3 = ttk.Frame(action)
         row3.pack(fill=tk.X, padx=6, pady=(2, 6))
-        ttk.Button(row3, text="Apply (append)", command=lambda: self._apply_archive_to_selected(overwrite=False)).pack(side=tk.LEFT)
-        ttk.Button(row3, text="Apply (overwrite)", command=lambda: self._apply_archive_to_selected(overwrite=True)).pack(side=tk.LEFT, padx=(6, 0))
+        ttk.Button(row3, text="Apply", command=lambda: self._apply_archive_to_selected(overwrite=True)).pack(side=tk.LEFT, padx=(6, 0))
 
         mid_right = ttk.Frame(mid)
         mid.add(mid_right, weight=8)
@@ -161,18 +160,17 @@ class MainWindow(ttk.Frame):
 
         g1 = ttk.Frame(save_box)
         g1.pack(fill=tk.X, padx=8, pady=(8, 4))
-        ttk.Label(g1, text="proj_name").pack(side=tk.LEFT)
+        ttk.Label(g1, text="OPJU file name").pack(side=tk.LEFT)
         ttk.Entry(g1, textvariable=self.global_proj_name_var, width=18).pack(side=tk.LEFT, padx=(6, 0))
 
         g2 = ttk.Frame(save_box)
         g2.pack(fill=tk.X, padx=8, pady=4)
-        ttk.Label(g2, text="folder_path").pack(side=tk.LEFT)
+        ttk.Label(g2, text="Path in OPJU    ").pack(side=tk.LEFT)
         ttk.Entry(g2, textvariable=self.global_folder_path_var, width=18).pack(side=tk.LEFT, padx=(6, 0))
 
         g3 = ttk.Frame(save_box)
         g3.pack(fill=tk.X, padx=8, pady=4)
-        ttk.Button(g3, text="Append to all", command=lambda: self._apply_archive_to_all(overwrite=False)).pack(side=tk.LEFT)
-        ttk.Button(g3, text="Overwrite all", command=lambda: self._apply_archive_to_all(overwrite=True)).pack(side=tk.LEFT, padx=(6, 0))
+        ttk.Button(g3, text="Apply", command=lambda: self._apply_archive_to_all(overwrite=True)).pack(side=tk.LEFT, padx=(6, 0))
 
         g4 = ttk.Frame(save_box)
         g4.pack(fill=tk.X, padx=8, pady=(10, 4))
