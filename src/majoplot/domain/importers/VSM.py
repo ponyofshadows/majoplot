@@ -101,7 +101,10 @@ class VSM:
         points = []
         for line in raw_data_file:
             cells = line.split(",")
-            points.append(tuple(float(cells[i]) for i in indexs))
+            try:
+                points.append(tuple(float(cells[i]) for i in indexs))
+            except (IndexError, ValueError):
+                continue
 
         return Data(
             labels=labels,
