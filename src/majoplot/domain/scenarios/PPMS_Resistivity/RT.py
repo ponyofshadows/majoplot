@@ -17,8 +17,8 @@ RI ={
 
 class RT:
     data_summary_label_names = ["H"]
-    axes_label_names = ("date", "raw_data", "bridge", "sample_name")
-    figure_label_names = ("date", "raw_data", "bridge", "sample_name")
+    axes_label_names = ("raw_data", "bridge", "sample_name")
+    figure_label_names = ("raw_data", "bridge", "sample_name")
     figure_summary_label_names = ("raw_data","bridge","sample_name")
     max_axes_in_one_figure = 1
     project_to_child_folder_label_names = {"date":"sample_name"}
@@ -41,13 +41,15 @@ class RT:
             for point in raw_points[1:]:
                 cur_H_stage = round(point[headers[H]])
                 if cur_H_stage != last_H_stage:
-                    split_datas.append(current_points)
+                    if len(current_points[1]) >= MIN_POINTS:
+                        split_datas.append(current_points)
                     last_H_stage = cur_H_stage
-                    current_points = [ last_H_stage, [ point ] ]
+                    current_points = [ cur_H_stage, [ point ] ]
                 else:
                     current_points[1].append(point)
             else:
-                split_datas.append(current_points)
+                if len(current_points[1]) >= MIN_POINTS:
+                    split_datas.append(current_points)
 
             # 3 bridges
             for H_stage, points in split_datas:
@@ -75,17 +77,11 @@ class RT:
                     labels["I_range"] = LabelValue(Irange,unit="μA")
                     labels.summary_names = cls.data_summary_label_names
 
-                    if s_points.shape[0] < MIN_POINTS:
-                        unused = True
-                    else:
-                        unused = False
-
                     datas.append(Data(
                         labels=labels,
                         _headers=_headers,
                         points=s_points[:,0:2],
                         ignore_outliers=IgnoreOutlierSpec(min_gap_base=1e-4,min_gap_multiple=10),
-                        unused=unused,
                     ))
             
         return datas

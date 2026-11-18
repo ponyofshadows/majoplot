@@ -22,8 +22,8 @@ RI_normalized ={
 
 class RT_normalized:
     data_summary_label_names = ["H"]
-    axes_label_names = ("date", "raw_data", "bridge", "sample_name")
-    figure_label_names = ("date", "raw_data", "bridge", "sample_name")
+    axes_label_names = ("raw_data", "bridge", "sample_name")
+    figure_label_names = ("raw_data", "bridge", "sample_name")
     figure_summary_label_names = ("raw_data","bridge","sample_name")
     max_axes_in_one_figure = 1
     project_to_child_folder_label_names = {"date":"sample_name"}
@@ -46,13 +46,15 @@ class RT_normalized:
             for point in raw_points[1:]:
                 cur_H_stage = round(point[headers[H]])
                 if cur_H_stage != last_H_stage:
-                    split_datas.append(current_points)
+                    if len(current_points[1]) >= MIN_POINTS:
+                        split_datas.append(current_points)
                     last_H_stage = cur_H_stage
                     current_points = [ last_H_stage, [ point ] ]
                 else:
                     current_points[1].append(point)
             else:
-                split_datas.append(current_points)
+                if len(current_points[1]) >= MIN_POINTS:
+                    split_datas.append(current_points)
 
             # 3 bridges
             for H_stage, points in split_datas:
