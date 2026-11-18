@@ -381,7 +381,7 @@ class Scenario(Protocol):
     figure_label_names:tuple[str]
     figure_summary_label_names:list[str]
     max_axes_in_one_figure:int
-    project_to_child_folder_label_names: str
+    project_to_child_folder_label_names: dict[str, str | None]
     parent_folder_name: str
 
     @classmethod
