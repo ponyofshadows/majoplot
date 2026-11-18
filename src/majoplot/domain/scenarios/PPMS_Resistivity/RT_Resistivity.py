@@ -76,7 +76,7 @@ class RT_Resistivity:
                     Imin = np.min(s_points[:,2])
                     Imax = np.max(s_points[:,2])
                     if (Imax - Imin) / Imax < 0.03:
-                        Irange = f"{np.mean(s_points[:,1]):.1e}"
+                        Irange = f"{np.mean(s_points[:,2]):.1e}"
                     else:
                         Irange = f"{Imin:.1e}~{Imax:.1e}"
                     labels = LabelDict()
