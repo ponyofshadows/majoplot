@@ -4,7 +4,7 @@ from ...base import *
 
 
 FIGSIZE = (8, 6)
-MIN_POINTS = 5
+MIN_POINTS = 10
 
 T = "Temperature (K)"
 H = "Magnetic Field (Oe)"
